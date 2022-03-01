@@ -11,15 +11,12 @@ const searchPhone = () => {
 
 }
 const showSearchResult = data => {
-
     const searchResult = document.getElementById('search-result');
-
     data.forEach(data => {
-
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `<div class="card border-1" style="width: 18rem;">
-        <img src="${data.image}" class="w-75 card-img-top" alt="...">
+        <img src="${data.image}" class="w-50 card-img-top" alt="...">
         <div class="card-body">
             <h3 class="card-title">Name:${data.phone_name}</h3>
             <h4 class="card-title">Brand:${data.brand}</h4>
@@ -27,41 +24,44 @@ const showSearchResult = data => {
         </div>
     </div>
 </div>`
-
         searchResult.appendChild(div);
-
     });
 
 }
 
-const phoneDetails = (details) => {
+const phoneDetails = phoneId => {
 
-    const url = `https://openapi.programming-hero.com/api/phone/${details}`;
+    const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     fetch(url)
         .then((res) => res.json())
-        .then((data) => showDetails(data));
+        .then((data) => showDetails(data.data))
 }
-
-const showDetails = data => {
+const showDetails = info => {
+    console.log(info);
     const displayDetails = document.getElementById('mobile-details');
-
     const div = document.createElement('div');
-    div.classList.add('card');
-    div.innerHTML = `
-        <img src="${data.image}" class="w-50 card-img-top" alt="...">
-        <div class="card-body">
-            <h3 class="card-title">Name:${data.name}</h3>
-            <h5 class="card-title">Storage:${data.storage}</h5>
-            <h5 class="card-title">DisplaySize:${data.displaySize}</h5>
-            <h5 class="card-title">ChipSet:${data.chipSet}</h5>
-            <h5 class="card-title">Memory:${data.memory}</h5>
-            
-        </div>
-    </div>
-</div>`
+    div.classList.add('card')
+    div.innerHTML = `<img src="${info.image}" class="w-75">
+    <h2 class="card-title">Name:${info.name}</h2>
+    <h5 class="card-title">ReleaseDate:${info.releaseDate}</h5>
+    <h5 class="card-title"slug:${info.slug}</h5>
+    <h3 class="card-title">Brand:${info.brand}</h3>
+    <br>
+    <h5 class="card-title">Storage:${info.mainFeatures.storage}</h5>
+    <h5 class="card-title">DisplaySize:${info.mainFeatures.displaySize}</h5>
+    <h5 class="card-title">ChipSet:${info.mainFeatures.chipSet}</h5>
+    <h5 class="card-title">Memory:${info.mainFeatures.memory}</h5>
+    <br>
+    <h2 class="card-title">Others Features:</h2>
+    <br>
+    <h5 class="card-title">WLAN:${info.others.WLAN}</h5>
+    <h5 class="card-title">Bluetooth:${info.others.Bluetooth}</h5>
+    <h5 class="card-title">GPS:${info.others.GPS}</h5>
+    <h5 class="card-title">NFC:${info.others.NFC}</h5>
+    <h5 class="card-title">Radio:${info.others.Radio}</h5>
+    <h5 class="card-title">USB:${info.others.USB}</h5>`
+
 
     displayDetails.appendChild(div);
-
-
 
 }
