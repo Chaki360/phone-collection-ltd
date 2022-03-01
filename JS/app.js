@@ -42,7 +42,7 @@ const showDetails = info => {
     const div = document.createElement('div');
     div.classList.add('card')
     div.innerHTML = `<img src="${info.image}" class="w-75">
-    <h2 class="card-title">Name:${info.name}</h2>
+    <h2 class="card-title">${info.name}</h2>
     <h5 class="card-title">ReleaseDate:${info.releaseDate}</h5>
     <h5 class="card-title"slug:${info.slug}</h5>
     <h3 class="card-title">Brand:${info.brand}</h3>
