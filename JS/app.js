@@ -23,7 +23,7 @@ const showSearchResult = data => {
         <div class="card-body">
             <h3 class="card-title">Name:${data.phone_name}</h3>
             <h4 class="card-title">Brand:${data.brand}</h4>
-            <a href="#" class="btn rounded-3 btn-primary fw-bold" onclick="phoneDetails()">More Info</a>
+            <a href="#" class="btn rounded-3 btn-primary fw-bold" onclick="phoneDetails('${data.slug}')">More Info</a>
         </div>
     </div>
 </div>`
@@ -34,6 +34,34 @@ const showSearchResult = data => {
 
 }
 
-const phoneDetails = () => {
-    console.log("ok fine i gotcha")
+const phoneDetails = (details) => {
+
+    const url = `https://openapi.programming-hero.com/api/phone/${details}`;
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => showDetails(data));
+}
+
+const showDetails = data => {
+    const displayDetails = document.getElementById('mobile-details');
+
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
+        <img src="${data.image}" class="w-50 card-img-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">Name:${data.name}</h3>
+            <h5 class="card-title">Storage:${data.storage}</h5>
+            <h5 class="card-title">DisplaySize:${data.displaySize}</h5>
+            <h5 class="card-title">ChipSet:${data.chipSet}</h5>
+            <h5 class="card-title">Memory:${data.memory}</h5>
+            
+        </div>
+    </div>
+</div>`
+
+    displayDetails.appendChild(div);
+
+
+
 }
