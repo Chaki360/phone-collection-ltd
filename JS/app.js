@@ -12,8 +12,10 @@ const searchPhone = () => {
 }
 const showSearchResult = data => {
     const searchResult = document.getElementById('search-result');
+
     data.forEach(data => {
         const div = document.createElement('div');
+
         div.classList.add('col');
         div.innerHTML = `<div class="card border-1" style="width: 18rem;">
         <img src="${data.image}" class="w-50 card-img-top" alt="...">
@@ -25,6 +27,9 @@ const showSearchResult = data => {
     </div>
 </div>`
         searchResult.appendChild(div);
+
+
+
     });
 
 }
@@ -43,7 +48,7 @@ const showDetails = info => {
     div.classList.add('card')
     div.innerHTML = `<img src="${info.image}" class="w-75">
     <h2 class="card-title">${info.name}</h2>
-    <h5 class="card-title">ReleaseDate:${info.releaseDate}</h5>
+    <h5 class="card-title">ReleaseDate:${info.releaseDate ? info.releaseDate : 'Coming Soon'}</h5>
     <h5 class="card-title"slug:${info.slug}</h5>
     <h3 class="card-title">Brand:${info.brand}</h3>
     <br>
@@ -51,6 +56,7 @@ const showDetails = info => {
     <h5 class="card-title">DisplaySize:${info.mainFeatures.displaySize}</h5>
     <h5 class="card-title">ChipSet:${info.mainFeatures.chipSet}</h5>
     <h5 class="card-title">Memory:${info.mainFeatures.memory}</h5>
+    <h5 class="card-title">Sensors:${info.mainFeatures.sensors}</h5>
     <br>
     <h2 class="card-title">Others Features:</h2>
     <br>
@@ -58,8 +64,8 @@ const showDetails = info => {
     <h5 class="card-title">Bluetooth:${info.others.Bluetooth}</h5>
     <h5 class="card-title">GPS:${info.others.GPS}</h5>
     <h5 class="card-title">NFC:${info.others.NFC}</h5>
-    <h5 class="card-title">Radio:${info.others.Radio}</h5>
-    <h5 class="card-title">USB:${info.others.USB}</h5>`
+    <h5 class="card-title">Radio:${info.others?.Radio ? info.others.Radio : 'no info'}</h5>
+    <h5 class="card-title">USB:${info.others?.USB ? info.others.USB : 'no info'}</h5>`
 
 
     displayDetails.appendChild(div);
