@@ -13,7 +13,7 @@ const searchPhone = () => {
 const showSearchResult = data => {
     const searchResult = document.getElementById('search-result');
 
-    data.forEach(data => {
+    data.slice(0, 20).forEach(data => {
         const div = document.createElement('div');
 
         div.classList.add('col');
